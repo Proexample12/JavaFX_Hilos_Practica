@@ -114,6 +114,7 @@ public class ProcesadorController {
         private Thread trabajador;
         private long ejecucionId;
         private boolean cerrando;
+        private int procesadosActuales;
 
         private ProcesoSimulado(
                 String nombre,
@@ -145,8 +146,11 @@ public class ProcesadorController {
             }
 
             cerrando = false;
+            if (procesadosActuales >= total) {
+                procesadosActuales = 0;
+                actualizarProgreso(procesadosActuales);
+            }
             long idActual = ++ejecucionId;
-            actualizarProgreso(0);
             estadoLabel.setText("Procesando registros simulados...");
             configurarBotones(true);
 
@@ -161,10 +165,10 @@ public class ProcesadorController {
 
         private void ejecutarProceso(long idActual) {
             boolean detenido = false;
-            int procesados = 0;
+            int procesados = procesadosActuales;
 
             try {
-                for (int registro = 1; registro <= total; registro++) {
+                for (int registro = procesados + 1; registro <= total; registro++) {
                     if (Thread.currentThread().isInterrupted()) {
                         detenido = true;
                         break;
@@ -218,6 +222,7 @@ public class ProcesadorController {
             }
 
             ejecucionId++;
+            procesadosActuales = 0;
             actualizarProgreso(0);
             estadoLabel.setText("Esperando inicio");
             configurarBotones(false);
@@ -250,6 +255,7 @@ public class ProcesadorController {
         }
 
         private void actualizarProgreso(int procesados) {
+            procesadosActuales = procesados;
             double progreso = procesados / (double) total;
             progresoBar.setProgress(progreso);
             porcentajeLabel.setText(String.format(Locale.US, "%.0f%%", progreso * 100));

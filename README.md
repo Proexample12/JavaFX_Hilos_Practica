@@ -58,7 +58,8 @@ README.md
 4. Para el reto final, presionar **Iniciar** en **Clientes** y **Productos**.
 5. Observar que ambos progresos avanzan simultáneamente porque cada proceso usa su propio `Thread`.
 6. Probar **Detener** en una sección y verificar que la otra continúa.
-7. Probar **Reiniciar** después de detener o finalizar y verificar que solo se restablece esa sección.
+7. Volver a presionar **Iniciar** en la sección detenida y verificar que continúa desde el avance alcanzado.
+8. Probar **Reiniciar** después de detener o finalizar y verificar que solo se restablece esa sección.
 
 ## Explicación técnica
 
@@ -93,6 +94,8 @@ El botón **Detener** llama `interrupt()` sobre el trabajador activo. El ciclo r
 
 Al capturar `InterruptedException`, el código restaura la marca con `Thread.currentThread().interrupt()` y finaliza el proceso de forma ordenada.
 
+El avance alcanzado se conserva. Si se vuelve a presionar **Iniciar** después de detener, se crea un `Thread` nuevo y el ciclo continúa desde el siguiente registro pendiente.
+
 ### Reinicio
 
 **Reiniciar** restablece únicamente la sección seleccionada:
@@ -106,6 +109,8 @@ No inicia automáticamente un nuevo proceso.
 ### Por qué no se reutiliza un Thread terminado
 
 Un objeto `Thread` en Java solo puede iniciarse una vez. Cuando termina, no se puede volver a llamar `start()` sobre el mismo objeto. Por eso cada nueva ejecución crea un `Thread` nuevo.
+
+Cuando un proceso fue detenido, no se reutiliza el `Thread` anterior. Se crea otro `Thread`, pero el contador conservado permite continuar desde el punto donde quedó.
 
 ### Cierre de la ventana
 
@@ -143,5 +148,5 @@ No se incluyen capturas fabricadas. Capturas pendientes para la entrega:
 - Cada proceso se detiene individualmente.
 - Reiniciar restablece solo su sección.
 - Pulsaciones repetidas no duplican trabajadores.
-- Detener y volver a iniciar no muestra avances antiguos.
+- Detener y volver a iniciar continúa desde el avance alcanzado.
 - Cerrar durante el procesamiento solicita la detención de trabajadores.
