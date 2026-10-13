@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox spacing="18.0" xmlns="http://javafx.com/javafx/21.0.6" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="ni.edu.uam.practicahilos.ProcesadorController">
+    <padding>
+        <Insets bottom="22.0" left="24.0" right="24.0" top="22.0"/>
+    </padding>
+
+    <Label text="NicaData Solutions — Monitor de procesos">
+        <font>
+            <Font name="System Bold" size="22.0"/>
+        </font>
+    </Label>
+
+    <Label text="Práctica de Thread y Runnable con registros simulados. No se usa base de datos ni persistencia." wrapText="true"/>
+
+    <VBox spacing="10.0" style="-fx-border-color: #b8c2cc; -fx-border-radius: 6; -fx-padding: 16;">
+        <Label text="Procesamiento de clientes">
+            <font>
+                <Font name="System Bold" size="16.0"/>
+            </font>
+        </Label>
+
+        <GridPane hgap="12.0" vgap="10.0">
+            <columnConstraints>
+                <ColumnConstraints minWidth="120.0"/>
+                <ColumnConstraints hgrow="ALWAYS" minWidth="220.0"/>
+                <ColumnConstraints minWidth="90.0"/>
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="28.0"/>
+                <RowConstraints minHeight="28.0"/>
+                <RowConstraints minHeight="36.0"/>
+            </rowConstraints>
+
+            <Label text="Estado:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+            <Label fx:id="estadoClientesLabel" text="Esperando inicio" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+            <Label fx:id="contadorClientesLabel" text="0/100" GridPane.columnIndex="2" GridPane.rowIndex="0"/>
+
+            <Label text="Progreso:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+            <ProgressBar fx:id="progresoClientesBar" maxWidth="1.7976931348623157E308" progress="0.0"
+                         GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+            <Label fx:id="porcentajeClientesLabel" text="0%" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
+
+            <HBox spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                <Button fx:id="iniciarClientesButton" minWidth="90.0" onAction="#iniciarClientes" text="Iniciar"/>
+                <Button fx:id="detenerClientesButton" minWidth="90.0" onAction="#detenerClientes" text="Detener"/>
+                <Button fx:id="reiniciarClientesButton" minWidth="90.0" onAction="#reiniciarClientes" text="Reiniciar"/>
+            </HBox>
+        </GridPane>
+
+        <Label text="Práctica básica: procesa 100 registros, con 100 ms por registro, aproximadamente 10 segundos." wrapText="true"/>
+    </VBox>
+
+    <VBox spacing="10.0" style="-fx-border-color: #b8c2cc; -fx-border-radius: 6; -fx-padding: 16;">
+        <Label text="Procesamiento de productos">
+            <font>
+                <Font name="System Bold" size="16.0"/>
+            </font>
+        </Label>
+
+        <GridPane hgap="12.0" vgap="10.0">
+            <columnConstraints>
+                <ColumnConstraints minWidth="120.0"/>
+                <ColumnConstraints hgrow="ALWAYS" minWidth="220.0"/>
+                <ColumnConstraints minWidth="90.0"/>
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="28.0"/>
+                <RowConstraints minHeight="28.0"/>
+                <RowConstraints minHeight="36.0"/>
+            </rowConstraints>
+
+            <Label text="Estado:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+            <Label fx:id="estadoProductosLabel" text="Esperando inicio" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+            <Label fx:id="contadorProductosLabel" text="0/50" GridPane.columnIndex="2" GridPane.rowIndex="0"/>
+
+            <Label text="Progreso:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+            <ProgressBar fx:id="progresoProductosBar" maxWidth="1.7976931348623157E308" progress="0.0"
+                         GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+            <Label fx:id="porcentajeProductosLabel" text="0%" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
+
+            <HBox spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                <Button fx:id="iniciarProductosButton" minWidth="90.0" onAction="#iniciarProductos" text="Iniciar"/>
+                <Button fx:id="detenerProductosButton" minWidth="90.0" onAction="#detenerProductos" text="Detener"/>
+                <Button fx:id="reiniciarProductosButton" minWidth="90.0" onAction="#reiniciarProductos" text="Reiniciar"/>
+            </HBox>
+        </GridPane>
+
+        <Label text="Reto final: procesa 50 registros, con 150 ms por registro, aproximadamente 7,5 segundos." wrapText="true"/>
+    </VBox>
+</VBox>
